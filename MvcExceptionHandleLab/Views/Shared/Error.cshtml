@@ -1,0 +1,11 @@
+﻿@model HandleErrorInfo
+@{
+    ViewBag.Title = "Error";
+}
+
+<h2>Exception details</h2>
+<p>
+    Controller: @Model.ControllerName <br>
+    Action: @Model.ActionName
+    Exception: @Model.Exception
+</p>

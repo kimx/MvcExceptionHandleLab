@@ -1,0 +1,15 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Make an error</h2>
+        @using (Html.BeginForm("MakeError", "Home"))
+        {
+            <button type="submit" class="btn btn-warning">MakeError</button>
+        }
+    </div>
+
+</div>

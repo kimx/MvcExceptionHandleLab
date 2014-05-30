@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="SYSCKIND">
+          <Key>
+            <PropertyRef Name="CKIND" />
+          </Key>
+          <Property Name="CKIND" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="DESCTXT" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="SYSCODE">
+          <Key>
+            <PropertyRef Name="CODE_ID" />
+          </Key>
+          <Property Name="CODE_ID" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="CKIND" Type="varchar" MaxLength="4" />
+          <Property Name="CODE_NO" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="CODE_NAME" Type="nvarchar" MaxLength="64" />
+          <Property Name="DESCTXT" Type="nvarchar" MaxLength="256" />
+          <Property Name="ENABLED" Type="varchar" MaxLength="1" />
+          <Property Name="ORDERNUM" Type="int" />
+          <Property Name="COMP_NO" Type="varchar" MaxLength="4" />
+          <Property Name="DEP_NO" Type="varchar" MaxLength="8" />
+          <Property Name="DEL_CODE" Type="varchar" MaxLength="1" />
+        </EntityType>
+        <Association Name="FK_SYSCODE_RELATIONS_SYSCKIND">
+          <End Role="SYSCKIND" Type="Self.SYSCKIND" Multiplicity="0..1" />
+          <End Role="SYSCODE" Type="Self.SYSCODE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SYSCKIND">
+              <PropertyRef Name="CKIND" />
+            </Principal>
+            <Dependent Role="SYSCODE">
+              <PropertyRef Name="CKIND" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="SYSCKIND" EntityType="Self.SYSCKIND" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SYSCODE" EntityType="Self.SYSCODE" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_SYSCODE_RELATIONS_SYSCKIND" Association="Self.FK_SYSCODE_RELATIONS_SYSCKIND">
+            <End Role="SYSCKIND" EntitySet="SYSCKIND" />
+            <End Role="SYSCODE" EntitySet="SYSCODE" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="SYSCKIND">
+          <Key>
+            <PropertyRef Name="CKIND" />
+          </Key>
+          <Property Name="CKIND" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DESCTXT" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="SYSCODE" Relationship="Self.FK_SYSCODE_RELATIONS_SYSCKIND" FromRole="SYSCKIND" ToRole="SYSCODE" />
+        </EntityType>
+        <EntityType Name="SYSCODE">
+          <Key>
+            <PropertyRef Name="CODE_ID" />
+          </Key>
+          <Property Name="CODE_ID" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CKIND" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="CODE_NO" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CODE_NAME" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="DESCTXT" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="ENABLED" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="ORDERNUM" Type="Int32" />
+          <Property Name="COMP_NO" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="DEP_NO" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="DEL_CODE" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="SYSCKIND" Relationship="Self.FK_SYSCODE_RELATIONS_SYSCKIND" FromRole="SYSCODE" ToRole="SYSCKIND" />
+        </EntityType>
+        <Association Name="FK_SYSCODE_RELATIONS_SYSCKIND">
+          <End Role="SYSCKIND" Type="Self.SYSCKIND" Multiplicity="0..1" />
+          <End Role="SYSCODE" Type="Self.SYSCODE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SYSCKIND">
+              <PropertyRef Name="CKIND" />
+            </Principal>
+            <Dependent Role="SYSCODE">
+              <PropertyRef Name="CKIND" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="SYSCKIND" EntityType="Self.SYSCKIND" />
+          <EntitySet Name="SYSCODE" EntityType="Self.SYSCODE" />
+          <AssociationSet Name="FK_SYSCODE_RELATIONS_SYSCKIND" Association="Self.FK_SYSCODE_RELATIONS_SYSCKIND">
+            <End Role="SYSCKIND" EntitySet="SYSCKIND" />
+            <End Role="SYSCODE" EntitySet="SYSCODE" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="SYSCKIND">
+            <EntityTypeMapping TypeName="Model.SYSCKIND">
+              <MappingFragment StoreEntitySet="SYSCKIND">
+                <ScalarProperty Name="CKIND" ColumnName="CKIND" />
+                <ScalarProperty Name="DESCTXT" ColumnName="DESCTXT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SYSCODE">
+            <EntityTypeMapping TypeName="Model.SYSCODE">
+              <MappingFragment StoreEntitySet="SYSCODE">
+                <ScalarProperty Name="CODE_ID" ColumnName="CODE_ID" />
+                <ScalarProperty Name="CKIND" ColumnName="CKIND" />
+                <ScalarProperty Name="CODE_NO" ColumnName="CODE_NO" />
+                <ScalarProperty Name="CODE_NAME" ColumnName="CODE_NAME" />
+                <ScalarProperty Name="DESCTXT" ColumnName="DESCTXT" />
+                <ScalarProperty Name="ENABLED" ColumnName="ENABLED" />
+                <ScalarProperty Name="ORDERNUM" ColumnName="ORDERNUM" />
+                <ScalarProperty Name="COMP_NO" ColumnName="COMP_NO" />
+                <ScalarProperty Name="DEP_NO" ColumnName="DEP_NO" />
+                <ScalarProperty Name="DEL_CODE" ColumnName="DEL_CODE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="無" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
